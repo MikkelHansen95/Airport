@@ -12,14 +12,14 @@ public class Program {
   private static PassengerProducer producer;
   private static PassengerConsumer consumer;
   private static PassengerConsumer consumer1;
-  private static PriorityQueue<Passenger> queue;
+  private static PriorityQueuePassengers queue;
   private static Clock clock;
   
   private static void setup() {
     for (int hour = 7; hour <= 22; hour++) {
       planes.add(new Plane(new Time(hour, 00, 00)));
       }
-    queue = new PriorityQueuePassengers(10000);
+    queue = new PriorityQueuePassengers();
     /*
     PassengerFactory pasFac = new PassengerFactory();
     List<Passenger> passengers = pasFac.createListOfPassengers(planes.get(0));
@@ -37,6 +37,13 @@ public class Program {
   public static void main(String[] args) {
     setup();
     new Thread(clock).start();
+    /*
+      System.out.println(LateToFlight.compareTo(Monkey));
+      System.out.println(LateToFlight.compareTo(BusinessClass));
+      System.out.println(LateToFlight.compareTo(Disabled));
+      System.out.println(LateToFlight.compareTo(Family));
+      System.out.println(LateToFlight.compareTo(LateToFlight));
+      */
 
     }
   

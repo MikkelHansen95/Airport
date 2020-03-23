@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Clock implements Runnable {
-  private final long sleepingTime = 10;
+  private final long sleepingTime = 1;
   private boolean running = true;
   private final PassengerProducer producer;
   private final PassengerConsumer consumer;
@@ -32,6 +32,7 @@ public class Clock implements Runnable {
       while (running) {
         Thread.sleep(sleepingTime);
         producer.tick(this);
+        // producer.tick(this);
         consumer1.tick(this);
         consumer.tick(this);
         

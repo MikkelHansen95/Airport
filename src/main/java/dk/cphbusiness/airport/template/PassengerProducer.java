@@ -1,6 +1,7 @@
 package dk.cphbusiness.airport.template;
 
 import dk.cphbusiness.algorithm.examples.queues.PriorityQueue;
+import dk.cphbusiness.algorithm.examples.queues.PriorityQueuePassengers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,12 +9,12 @@ import java.util.Random;
 public class PassengerProducer {
   private static int nextPassengerId = 1;
   private final List<Plane> planes;
-  private final PriorityQueue<Passenger> queue;
+  private final PriorityQueuePassengers queue;
   private int processingTicksLeft = 0;
   private Random randomizer = new Random();
   private Time lastDeartureTime;
   
-  public PassengerProducer(List<Plane> planes, PriorityQueue<Passenger> queue) {
+  public PassengerProducer(List<Plane> planes, PriorityQueuePassengers queue) {
     this.planes = planes;
     this.queue = queue;
     lastDeartureTime = planes.get(planes.size() - 1).getDepartureTime();
@@ -44,16 +45,18 @@ public class PassengerProducer {
     Category category;
     if (plane.getDepartureTime().getMillis() - now.getMillis() < 15*60*1000)
         category = Category.LateToFlight;
-    else if (c < 10) category = Category.BusinessClass;
-    else if (c < 11) category = Category.Disabled;
-    else if (c < 15) category = Category.Family;
+    else if (c < 25) category = Category.BusinessClass;
+    else if (c < 35) category = Category.Disabled;
+    else if (c < 90) category = Category.Family;
     else category = Category.Monkey;
     
     Passenger passenger = new Passenger(nextPassengerId++, now, category, plane);
-    System.out.println("Producer:    ->      Passenger "+passenger+" added to queue");
-    queue.enqueue(passenger);
     
+    queue.enqueue(passenger);
+    System.out.println("Producer:     ->      Passenger "+passenger+" added to queue");
+
     processingTicksLeft = randomizer.nextInt(120);
+    //processingTicksLeft = 100;
     }
   
   

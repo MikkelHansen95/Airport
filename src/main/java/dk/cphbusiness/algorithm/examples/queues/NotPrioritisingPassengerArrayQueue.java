@@ -20,6 +20,7 @@ public class NotPrioritisingPassengerArrayQueue implements PriorityQueue<Passeng
       items = new Passenger[capacity];
       }
 
+  
     public void enqueue(Passenger item) {
       if (size == items.length)
           throw new IllegalStateException("Cannot add to full queue");
@@ -62,5 +63,6 @@ public class NotPrioritisingPassengerArrayQueue implements PriorityQueue<Passeng
     public void sort() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
     }
